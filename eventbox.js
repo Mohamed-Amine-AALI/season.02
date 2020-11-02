@@ -17,7 +17,7 @@ function withArgs(arr) {
         event.emit("listener", element);
     });
 }
-
-/* module.exports = [ empty ]; */
-exports.empty = empty;
-exports.withArgs = withArgs;
+module.exports = {
+    empty,
+    withArgs
+}
