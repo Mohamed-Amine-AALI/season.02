@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { cpuUsage } = require('process');
 const { Transform } = require('stream');
 
 function duplicate(fileName) {
@@ -30,6 +31,20 @@ function transform(fileName, re, fn, std_out) {
             .pipe(transformer)
             .pipe(writeStream);
     }
+}
+
+function WTFIsThisPipe() {
+    fs.readdir(__dirname, (error, files) => {
+        for (const filename of files.filter(filename => filename.endsWith('.js'))) {
+            const input = fs.createReadStream(filename);
+            const rl = readline.createInterface({ input });
+            rl.on('line', (line) => {
+                if (/^[\t ]*function/g.test(line)) {
+                    console.log(line.replace('function', 'I ill finish:').slice(0, -2));
+                }
+            });
+        }
+    })
 }
 
 module.exports = {
