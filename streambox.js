@@ -33,6 +33,25 @@ function transform(fileName, re, fn, std_out) {
     }
 }
 
+function csv2json(filename) {
+    const input = fs.createReadStream(filename)
+    const rl = readline.createInterface({ input })
+  
+    let lineCount = 0
+  
+    rl.on('line', (line) => {
+      if (lineCount === 0) {
+        // Header
+        
+      } else {
+        // Data
+      }
+      
+      console.log(`line(${lineCount}):`, line)
+      lineCount++
+    })
+  }
+
 function WTFIsThisPipe() {
     fs.readdir(__dirname, (error, files) => {
         for (const filename of files.filter(filename => filename.endsWith('.js'))) {
@@ -49,5 +68,7 @@ function WTFIsThisPipe() {
 
 module.exports = {
     duplicate,
-    transform
+    transform,
+    csv2json,
+    WTFIsThisPipe
 }
